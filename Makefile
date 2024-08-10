@@ -794,9 +794,9 @@ ifdef MINGW
     CLIENT_EXTRA_FILES += $(LIBSDIR)/win32/SDL2.dll
     else
     CLIENT_LIBS += $(LIBSDIR)/win64/libSDL264main.a \
-                      $(LIBSDIR)/win64/libSDL264.dll.a
+                      $(LIBSDIR)/win64/uwp/SDL2.lib
     RENDERER_LIBS += $(LIBSDIR)/win64/libSDL264main.a \
-                      $(LIBSDIR)/win64/libSDL264.dll.a
+                      $(LIBSDIR)/win64/uwp/SDL2.lib
     SDLDLL=SDL264.dll
     CLIENT_EXTRA_FILES += $(LIBSDIR)/win64/SDL264.dll
     endif
@@ -1153,6 +1153,9 @@ endif
 ifndef SHLIBNAME
   SHLIBNAME=$(ARCH).$(SHLIBEXT)
 endif
+
+# Force to dll for UWP
+FULLBINEXT=.$(ARCH).dll
 
 ifneq ($(BUILD_SERVER),0)
   TARGETS += $(B)/$(SERVERBIN)$(FULLBINEXT)
@@ -2414,7 +2417,7 @@ ifneq ($(USE_RENDERER_DLOPEN),0)
 $(B)/$(CLIENTBIN)$(FULLBINEXT): $(Q3OBJ) $(LIBSDLMAIN)
 	$(echo_cmd) "LD $@"
 	$(Q)$(CC) $(CLIENT_CFLAGS) $(CFLAGS) $(CLIENT_LDFLAGS) $(LDFLAGS) $(NOTSHLIBLDFLAGS) \
-		-o $@ $(Q3OBJ) \
+		-shared -o $@ $(Q3OBJ) -Wl,--out-implib=$(B)/lib$(CLIENTBIN).lib \
 		$(LIBSDLMAIN) $(CLIENT_LIBS) $(LIBS)
 
 $(B)/renderer_opengl1_$(SHLIBNAME): $(Q3ROBJ) $(JPGOBJ)
