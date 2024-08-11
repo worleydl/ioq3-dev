@@ -762,6 +762,12 @@ static void IN_GamepadMove( void )
 				Com_QueueEvent(in_eventTime, SE_KEY, negKey, qtrue, 0, NULL);
 
 			stick_state.oldaaxes[i] = axis;
+
+
+			// Forward off virtual mouse events for left stick
+			if (i == 2 || i ==3) {
+				Com_QueueEvent(in_eventTime, SE_VIRTUAL_MOUSE, i, axis, 0, NULL);
+			}
 		}
 	}
 
@@ -770,8 +776,9 @@ static void IN_GamepadMove( void )
 	{
 		for (i = 0; i < MAX_JOYSTICK_AXIS; i++)
 		{
-			if (translatedAxesSet[i])
+			if (translatedAxesSet[i]) {
 				Com_QueueEvent(in_eventTime, SE_JOYSTICK_AXIS, i, translatedAxes[i], 0, NULL);
+			}
 		}
 	}
 }

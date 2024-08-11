@@ -31,7 +31,6 @@ USER INTERFACE MAIN
 
 #include "ui_local.h"
 
-
 /*
 ================
 vmMain
@@ -59,6 +58,10 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 
 	case UI_MOUSE_EVENT:
 		UI_MouseEvent( arg0, arg1 );
+		return 0;
+
+	case UI_VIRTUAL_MOUSE_EVENT:
+		UI_VirtualMouseEvent ( arg0, arg1 );
 		return 0;
 
 	case UI_REFRESH:

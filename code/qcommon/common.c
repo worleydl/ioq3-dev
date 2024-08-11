@@ -185,6 +185,9 @@ void QDECL Com_Printf( const char *fmt, ... ) {
 		return;
 	}
 
+	// UWP debug
+	OutputDebugStringA(msg);
+
 #ifndef DEDICATED
 	CL_ConsolePrint( msg );
 #endif
@@ -2225,6 +2228,9 @@ int Com_EventLoop( void ) {
 			break;
 			case SE_JOYSTICK_AXIS:
 				CL_JoystickEvent( ev.evValue, ev.evValue2, ev.evTime );
+			break;
+			case SE_VIRTUAL_MOUSE:
+				CL_VirtualMouseEvent( ev.evValue, ev.evValue2, ev.evTime );
 			break;
 			case SE_CONSOLE:
 				Cbuf_AddText( (char *)ev.evPtr );

@@ -372,6 +372,24 @@ void CL_MouseEvent( int dx, int dy, int time ) {
 
 /*
 =================
+CL_VirtualMouseEvent
+=================
+*/
+void CL_VirtualMouseEvent( int axis, int value, int time)
+{
+	if ( Key_GetCatcher( ) & KEYCATCH_UI ) {
+		if ( axis == 2 ) {
+			// Axis indicator as last arg (arg1), X=0, Y=1
+			VM_Call(uivm, UI_VIRTUAL_MOUSE_EVENT, value, 0);
+		} else if ( axis == 3 ) {
+			VM_Call(uivm, UI_VIRTUAL_MOUSE_EVENT, value, 1);
+		}
+	}
+}
+
+
+/*
+=================
 CL_JoystickEvent
 
 Joystick values stay set until changed

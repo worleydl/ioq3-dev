@@ -794,7 +794,8 @@ ifdef MINGW
     CLIENT_EXTRA_FILES += $(LIBSDIR)/win32/SDL2.dll
     else
     CLIENT_LIBS += $(LIBSDIR)/win64/libSDL264main.a \
-                      $(LIBSDIR)/win64/uwp/SDL2.lib
+                      $(LIBSDIR)/win64/uwp/SDL2.lib \
+                      $(LIBSDIR)/win64/uwp/libuwp.dll
     RENDERER_LIBS += $(LIBSDIR)/win64/libSDL264main.a \
                       $(LIBSDIR)/win64/uwp/SDL2.lib
     SDLDLL=SDL264.dll
@@ -1398,6 +1399,9 @@ endif
 ifdef SOURCE_DATE_EPOCH
   BASE_CFLAGS += -DPRODUCT_DATE=\\\"$(shell date --date="@$$SOURCE_DATE_EPOCH" "+%b %_d %Y" | sed -e 's/ /\\\ /'g)\\\"
 endif
+
+# Server needs libuwp too
+SERVER_LIBS = $(LIBSDIR)/win64/uwp/libuwp.dll
 
 BASE_CFLAGS += -DPRODUCT_VERSION=\\\"$(VERSION)\\\"
 BASE_CFLAGS += -Wformat=2 -Wno-format-zero-length -Wformat-security -Wno-format-nonliteral
@@ -2588,7 +2592,7 @@ endif
 
 $(B)/$(SERVERBIN)$(FULLBINEXT): $(Q3DOBJ)
 	$(echo_cmd) "LD $@"
-	$(Q)$(CC) $(CFLAGS) $(LDFLAGS) $(NOTSHLIBLDFLAGS) -o $@ $(Q3DOBJ) $(LIBS)
+	$(Q)$(CC) $(CFLAGS) $(LDFLAGS) $(NOTSHLIBLDFLAGS) -o $@ $(Q3DOBJ) $(LIBS) $(SERVER_LIBS)
 
 
 

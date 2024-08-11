@@ -33,6 +33,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "qcommon.h"
 #include "unzip.h"
 
+__declspec(dllimport) void uwp_GetBundlePath(char* buffer);
+
 /*
 =============================================================================
 
@@ -3415,6 +3417,11 @@ static void FS_Startup( const char *gameName )
 			FS_AddGameDirectory(fs_homepath->string, fs_gamedirvar->string);
 		}
 	}
+
+	// Add UWP base folder as highest priority
+	static char uwpPath[256];
+	uwp_GetBundlePath(uwpPath);
+	FS_AddGameDirectory(uwpPath, gameName);
 
 #ifndef STANDALONE
 	if (!com_standalone->integer) {

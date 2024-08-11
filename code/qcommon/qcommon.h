@@ -804,7 +804,8 @@ typedef enum {
 	SE_CHAR,		// evValue is an ascii char
 	SE_MOUSE,		// evValue and evValue2 are relative signed x / y moves
 	SE_JOYSTICK_AXIS,	// evValue is an axis number and evValue2 is the current state (-127 to 127)
-	SE_CONSOLE		// evPtr is a char*
+	SE_CONSOLE,		// evPtr is a char*
+	SE_VIRTUAL_MOUSE	// Same as joystick axis but always fired for use in menus
 } sysEventType_t;
 
 typedef struct {
@@ -994,6 +995,7 @@ void CL_CharEvent( int key );
 // char events are for field typing, not game control
 
 void CL_MouseEvent( int dx, int dy, int time );
+void CL_VirtualMouseEvent( int axis, int value, int time );
 
 void CL_JoystickEvent( int axis, int value, int time );
 
