@@ -1372,10 +1372,21 @@ Called by the system for both key up and key down events
 ===================
 */
 void CL_KeyEvent (int key, qboolean down, unsigned time) {
+	int mapped = key;
+
+	if ( Key_GetCatcher( ) & KEYCATCH_UI) {
+		if (key == K_PAD0_A) {
+			mapped = K_ENTER;
+
+		} else if (key == K_PAD0_BACK) {
+			mapped = K_ESCAPE;
+		}
+	}
+
 	if( down )
-		CL_KeyDownEvent( key, time );
+		CL_KeyDownEvent( mapped, time );
 	else
-		CL_KeyUpEvent( key, time );
+		CL_KeyUpEvent( mapped, time );
 }
 
 /*
