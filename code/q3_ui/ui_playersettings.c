@@ -274,7 +274,7 @@ PlayerSettings_MenuKey
 =================
 */
 static sfxHandle_t PlayerSettings_MenuKey( int key ) {
-	if( key == K_MOUSE2 || key == K_ESCAPE ) {
+	if( key == K_MOUSE2 || key == K_ESCAPE || key == K_PAD0_START ) {
 		PlayerSettings_SaveChanges();
 	}
 	return Menu_DefaultKey( &s_playersettings.menu, key );

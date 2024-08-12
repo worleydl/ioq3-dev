@@ -259,7 +259,7 @@ UI_KeyConnect
 ===================
 */
 void UI_KeyConnect( int key ) {
-	if ( key == K_ESCAPE ) {
+	if ( key == K_ESCAPE || key == K_PAD0_START) {
 		trap_Cmd_ExecuteText( EXEC_APPEND, "disconnect\n" );
 		return;
 	}

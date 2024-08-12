@@ -164,6 +164,7 @@ sfxHandle_t UI_TeamOrdersMenu_Key( int key ) {
 	}
 
 	switch( key ) {
+		case K_PAD0_A:
 		case K_MOUSE1:
 			x = l->generic.left;
 			y = l->generic.top;

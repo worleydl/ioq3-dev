@@ -263,7 +263,7 @@ static bind_t g_bindings[] =
 	{"messagemode2", 	"chat - team",		ID_CHAT2,		ANIM_CHAT,		-1,				-1,		-1, -1},
 	{"messagemode3", 	"chat - target",	ID_CHAT3,		ANIM_CHAT,		-1,				-1,		-1, -1},
 	{"messagemode4", 	"chat - attacker",	ID_CHAT4,		ANIM_CHAT,		-1,				-1,		-1, -1},
-	{"togglemenu", 		"toggle menu",		ID_TOGGLEMENU,	ANIM_IDLE,		K_ESCAPE,		-1,		-1, -1},
+	{"togglemenu", 		"toggle menu",		ID_TOGGLEMENU,	ANIM_IDLE,		K_PAD0_START,		-1,		-1, -1},
 	{(char*)NULL,		(char*)NULL,		0,				0,				-1,				-1,		-1,	-1},
 };
 
@@ -913,11 +913,13 @@ static sfxHandle_t Controls_MenuKey( int key )
 			case K_BACKSPACE:
 			case K_DEL:
 			case K_KP_DEL:
+			case K_PAD0_BACK:
 				key = -1;
 				break;
 		
 			case K_MOUSE2:
 			case K_ESCAPE:
+			case K_PAD0_START:
 				if (s_controls.changesmade)
 					Controls_SetConfig();
 				goto ignorekey;	
@@ -933,6 +935,7 @@ static sfxHandle_t Controls_MenuKey( int key )
 
 		switch (key)
 		{
+			case K_PAD0_START:
 			case K_ESCAPE:
 				s_controls.waitingforkey = qfalse;
 				Controls_Update();

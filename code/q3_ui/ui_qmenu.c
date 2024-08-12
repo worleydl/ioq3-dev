@@ -456,6 +456,7 @@ static sfxHandle_t RadioButton_Key( menuradiobutton_s *rb, int key )
 {
 	switch (key)
 	{
+		case K_PAD0_A:
 		case K_MOUSE1:
 			if (!(rb->generic.flags & QMF_HASMOUSEFOCUS))
 				break;
@@ -571,6 +572,7 @@ static sfxHandle_t Slider_Key( menuslider_s *s, int key )
 
 	switch (key)
 	{
+		case K_PAD0_A:
 		case K_MOUSE1:
 			x           = uis.cursorx - s->generic.x - 2*SMALLCHAR_WIDTH;
 			oldvalue    = s->curvalue;
@@ -800,6 +802,7 @@ static sfxHandle_t SpinControl_Key( menulist_s *s, int key )
 	{
 		case K_KP_RIGHTARROW:
 		case K_RIGHTARROW:
+		case K_PAD0_A:
 		case K_MOUSE1:
 			s->curvalue++;
 			if (s->curvalue >= s->numitems)
@@ -920,6 +923,7 @@ sfxHandle_t ScrollList_Key( menulist_s *l, int key )
 
 	switch (key)
 	{
+		case K_PAD0_A:
 		case K_MOUSE1:
 			if (l->generic.flags & QMF_HASMOUSEFOCUS)
 			{
@@ -1622,6 +1626,8 @@ sfxHandle_t Menu_DefaultKey( menuframework_s *m, int key )
 	{
 		case K_MOUSE2:
 		case K_ESCAPE:
+		case K_PAD0_START:
+		case K_PAD0_B:
 			UI_PopMenu();
 			return menu_out_sound;
 	}
@@ -1699,6 +1705,7 @@ sfxHandle_t Menu_DefaultKey( menuframework_s *m, int key )
 			}
 			break;
 
+		case K_PAD0_A:
 		case K_MOUSE1:
 		case K_MOUSE3:
 			if (item)
