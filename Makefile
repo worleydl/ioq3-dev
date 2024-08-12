@@ -797,7 +797,8 @@ ifdef MINGW
                       $(LIBSDIR)/win64/uwp/SDL2.lib \
                       $(LIBSDIR)/win64/uwp/libuwp.dll
     RENDERER_LIBS += $(LIBSDIR)/win64/libSDL264main.a \
-                      $(LIBSDIR)/win64/uwp/SDL2.lib
+                      $(LIBSDIR)/win64/uwp/SDL2.lib \
+                      $(LIBSDIR)/win64/uwp/libuwp.dll
     SDLDLL=SDL264.dll
     CLIENT_EXTRA_FILES += $(LIBSDIR)/win64/SDL264.dll
     endif

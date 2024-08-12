@@ -35,6 +35,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../sys/sys_local.h"
 #include "sdl_icon.h"
 
+__declspec(dllimport) void uwp_GetScreenSize(int*, int*);
+
 typedef enum
 {
 	RSERR_OK,
@@ -482,6 +484,14 @@ static int GLimp_SetMode(int mode, qboolean fullscreen, qboolean noborder, qbool
 		return RSERR_INVALID_MODE;
 	}
 	ri.Printf( PRINT_ALL, " %d %d\n", glConfig.vidWidth, glConfig.vidHeight);
+
+	// TODO: Support lower resolutions via framebuffer
+	// Force to screen resolution for UWP
+	int uwpX, uwpY;
+	uwp_GetScreenSize(&uwpX, &uwpY);
+
+	glConfig.vidWidth = uwpX;
+	glConfig.vidHeight = uwpY;
 
 	// Center window
 	if( r_centerWindow->integer && !fullscreen )
