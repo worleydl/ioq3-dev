@@ -1391,6 +1391,22 @@ void CL_KeyEvent (int key, qboolean down, unsigned time) {
 			mapped = K_BACKSPACE;
 			break;
 
+		case K_PAD0_DPAD_UP:
+			mapped = K_UPARROW;
+			break;
+
+		case K_PAD0_DPAD_DOWN:
+			mapped = K_DOWNARROW;
+			break;
+
+		case K_PAD0_DPAD_LEFT:
+			mapped = K_LEFTARROW;
+			break;
+
+		case K_PAD0_DPAD_RIGHT:
+			mapped = K_RIGHTARROW;
+			break;
+
 		default:
 			// No-op
 	}
