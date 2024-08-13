@@ -1283,7 +1283,7 @@ void IN_Init( void *windowData )
 	SDL_EventState( SDL_DROPFILE, SDL_ENABLE );
 #endif
 
-	SDL_StartTextInput( );
+	//SDL_StartTextInput( );
 
 	mouseAvailable = ( in_mouse->value != 0 );
 	IN_DeactivateMouse( Cvar_VariableIntegerValue( "r_fullscreen" ) != 0 );
