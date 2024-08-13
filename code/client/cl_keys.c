@@ -1383,6 +1383,10 @@ void CL_KeyEvent (int key, qboolean down, unsigned time) {
 			mapped = K_MOUSE2;
 			break;
 
+		case K_PAD0_X:
+			mapped = K_ENTER;
+			break;
+
 		case K_PAD0_START:
 			mapped = K_ESCAPE;
 			break;
