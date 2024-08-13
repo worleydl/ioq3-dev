@@ -2207,7 +2207,10 @@ static ALCdevice *alCaptureDevice;
 static cvar_t *s_alCapture;
 #endif
 
-#if defined(_WIN64)
+// TODO: Cleanup preproc, using mingw openal which has different naming
+#if 1
+#define ALDRIVER_DEFAULT "libopenal-1.dll"
+#elif defined(_WIN64)
 #define ALDRIVER_DEFAULT "OpenAL64.dll"
 #elif defined(_WIN32)
 #define ALDRIVER_DEFAULT "OpenAL32.dll"
