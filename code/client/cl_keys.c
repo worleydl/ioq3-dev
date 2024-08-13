@@ -1372,10 +1372,33 @@ Called by the system for both key up and key down events
 ===================
 */
 void CL_KeyEvent (int key, qboolean down, unsigned time) {
+	// Remap controller buttons to keyboard/mouse events to play nice with pure VMs
+	int mapped = key;
+	switch (key) {
+		case K_PAD0_A:
+			mapped = K_MOUSE1;
+			break;
+
+		case K_PAD0_B:
+			mapped = K_MOUSE2;
+			break;
+
+		case K_PAD0_START:
+			mapped = K_ESCAPE;
+			break;
+
+		case K_PAD0_BACK:
+			mapped = K_BACKSPACE;
+			break;
+
+		default:
+			// No-op
+	}
+
 	if( down )
-		CL_KeyDownEvent( key, time );
+		CL_KeyDownEvent( mapped, time );
 	else
-		CL_KeyUpEvent( key, time );
+		CL_KeyUpEvent( mapped, time );
 }
 
 /*
