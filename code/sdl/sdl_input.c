@@ -765,7 +765,7 @@ static void IN_GamepadMove( void )
 
 
 			// Forward off virtual mouse events for left stick
-			if (i == 2 || i ==3) {
+			if (i == 0 || i == 1) {
 				Com_QueueEvent(in_eventTime, SE_VIRTUAL_MOUSE, i, axis, 0, NULL);
 			}
 		}

@@ -185,9 +185,6 @@ typedef enum {
 
 	UI_HASUNIQUECDKEY,
 
-	UI_VIRTUAL_MOUSE_EVENT,
-//	void	UI_VirtualMouseEvent( int dx, int dy );
-
 // if !overlay, the background will be drawn, otherwise it will be
 // overlayed over whatever the cgame has drawn.
 // a GetClientState syscall will be made to get the current strings

@@ -30,10 +30,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 uiStatic_t		uis;
 qboolean		m_entersound;		// after a frame, so caching won't disrupt the sound
 
-// state tracking for virtual mouse movement
-static int vm_dx = 0;
-static int vm_dy = 0;
-
 void QDECL Com_Error( int level, const char *error, ... ) {
 	va_list		argptr;
 	char		text[1024];
@@ -940,21 +936,6 @@ void UI_MouseEvent( int dx, int dy )
 	}
 }
 
-/*
-=================
-UI_VirtualMouseEvent
-=================
-*/
-#define VIRTUAL_MOUSE_DELTA 3
-void UI_VirtualMouseEvent( int delta, int axis ) {
-	if ( axis == 0 ) {
-		vm_dx = delta == 0 ? 0 : delta > 0 ? VIRTUAL_MOUSE_DELTA : -VIRTUAL_MOUSE_DELTA;
-	} else if ( axis == 1) {
-		vm_dy = delta == 0 ? 0 : delta > 0 ? VIRTUAL_MOUSE_DELTA : -VIRTUAL_MOUSE_DELTA;
-	}
-}
-
-
 char *UI_Argv( int arg ) {
 	static char	buffer[MAX_STRING_CHARS];
 
@@ -1223,10 +1204,6 @@ void UI_Refresh( int realtime )
 
 	if ( !( trap_Key_GetCatcher() & KEYCATCH_UI ) ) {
 		return;
-	}
-
-	if (vm_dx != 0 || vm_dy != 0) {
-		UI_MouseEvent( vm_dx, vm_dy );
 	}
 
 	UI_UpdateCvars();

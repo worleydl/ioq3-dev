@@ -3176,6 +3176,9 @@ void CL_StartHunkUsers( qboolean rendererOnly ) {
 
 	if ( !cls.uiStarted ) {
 		cls.uiStarted = qtrue;
+		cls.vm_dx = 0;
+		cls.vm_dy = 0;
+
 		CL_InitUI();
 	}
 }

@@ -572,6 +572,11 @@ void SCR_UpdateScreen( void ) {
 	// that case.
 	if( uivm || com_dedicated->integer )
 	{
+		// Push in virtual mouse events
+		if (cls.vm_dx != 0 || cls.vm_dy != 0) {
+			VM_Call( uivm, UI_MOUSE_EVENT, cls.vm_dx, cls.vm_dy );
+		}
+
 		// XXX
 		int in_anaglyphMode = Cvar_VariableIntegerValue("r_anaglyphMode");
 		// if running in stereo, we need to draw the frame twice

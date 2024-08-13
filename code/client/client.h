@@ -351,6 +351,10 @@ typedef struct {
 	qhandle_t	charSetShader;
 	qhandle_t	whiteShader;
 	qhandle_t	consoleShader;
+
+	// Virtual mouse state tracking
+	int	vm_dx;
+	int	vm_dy;
 } clientStatic_t;
 
 extern	clientStatic_t		cls;

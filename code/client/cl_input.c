@@ -373,20 +373,26 @@ void CL_MouseEvent( int dx, int dy, int time ) {
 /*
 =================
 CL_VirtualMouseEvent
+
+Maintains state tracking for virtual mouse but doesn't actually call events.
+
+If user holds stick to one side the events will stop flowing so we move mouse
+in cl_main based off the vm_dx/vm_dy state
 =================
 */
-void CL_VirtualMouseEvent( int axis, int value, int time)
+#define VIRTUAL_MOUSE_DELTA 3
+void CL_VirtualMouseEvent( int axis, int delta, int time)
 {
 	if ( Key_GetCatcher( ) & KEYCATCH_UI ) {
-		if ( axis == 2 ) {
-			// Axis indicator as last arg (arg1), X=0, Y=1
-			VM_Call(uivm, UI_VIRTUAL_MOUSE_EVENT, value, 0);
-		} else if ( axis == 3 ) {
-			VM_Call(uivm, UI_VIRTUAL_MOUSE_EVENT, value, 1);
+		if ( axis == 0 ) {
+			cls.vm_dx = delta == 0 ? 0 : delta > 0 ? VIRTUAL_MOUSE_DELTA : -VIRTUAL_MOUSE_DELTA;
+		} else if ( axis == 1 ) {
+			cls.vm_dy = delta == 0 ? 0 : delta > 0 ? VIRTUAL_MOUSE_DELTA : -VIRTUAL_MOUSE_DELTA;
 		}
+	} else {
+		cls.vm_dx = cls.vm_dy = 0;
 	}
 }
-
 
 /*
 =================
