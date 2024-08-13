@@ -292,7 +292,6 @@ static sfxHandle_t PlayerModel_MenuKey( int key )
 			}
 			break;
 			
-		case K_PAD0_START:
 		case K_MOUSE2:
 		case K_ESCAPE:
 			PlayerModel_SaveChanges();

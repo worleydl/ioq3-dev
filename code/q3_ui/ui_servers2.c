@@ -1323,7 +1323,7 @@ static sfxHandle_t ArenaServers_MenuKey( int key ) {
 		return menu_move_sound;
 	}
 
-	if( key == K_MOUSE2 || key == K_ESCAPE || key == K_PAD0_START ) {
+	if( key == K_MOUSE2 || key == K_ESCAPE ) {
 		ArenaServers_StopRefresh();
 		ArenaServers_SaveChanges();
 	}
