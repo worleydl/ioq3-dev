@@ -654,6 +654,16 @@ static void IN_GamepadMove( void )
 
 	SDL_GameControllerUpdate();
 
+	// Check doublestick combo
+	if (   SDL_GameControllerGetButton(gamepad, SDL_CONTROLLER_BUTTON_LEFTSTICK)
+	    && SDL_GameControllerGetButton(gamepad, SDL_CONTROLLER_BUTTON_RIGHTSTICK)  )
+	{
+		// Show keyboard for doublestick press in UI
+		if ( Key_GetCatcher( ) & KEYCATCH_UI ) {
+			SDL_StartTextInput();
+		}
+	}
+
 	// check buttons
 	for (i = 0; i < SDL_CONTROLLER_BUTTON_MAX; i++)
 	{
